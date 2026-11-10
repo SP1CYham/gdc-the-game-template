@@ -13,15 +13,74 @@ lose_on_timeout = true
 position = Vector2(577, 328)
 texture = ExtResource("2_5k1io")
 
-[node name="Label" type="Label" parent="." unique_id=1981055016]
-offset_left = 508.0
-offset_top = 227.0
-offset_right = 655.0
-offset_bottom = 250.0
-text = "Press space to win!"
-
-[node name="Control" type="Control" parent="." unique_id=1945944651]
+[node name="Canvas" type="Control" parent="." unique_id=1945944651]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="chat" type="Panel" parent="Canvas" unique_id=1936574137]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 324.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="sidebar2" type="Control" parent="Canvas" unique_id=1551634413]
+anchors_preset = 0
+offset_right = 324.0
+offset_bottom = 648.0
+
+[node name="Panel" type="Panel" parent="Canvas/sidebar2" unique_id=1345505481]
+layout_mode = 0
+offset_right = 324.0
+offset_bottom = 648.0
+
+[node name="chats" type="VBoxContainer" parent="Canvas/sidebar2" unique_id=551211933]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 142.0
+offset_right = 324.0
+offset_bottom = 635.0
+alignment = 1
+
+[node name="Label4" type="Label" parent="Canvas/sidebar2/chats" unique_id=1231828315]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label" type="Label" parent="Canvas/sidebar2/chats" unique_id=1981055016]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label2" type="Label" parent="Canvas/sidebar2/chats" unique_id=976707158]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label3" type="Label" parent="Canvas/sidebar2/chats" unique_id=932669936]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label5" type="Label" parent="Canvas/sidebar2/chats" unique_id=1636777374]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label6" type="Label" parent="Canvas/sidebar2/chats" unique_id=748258231]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="Label7" type="Label" parent="Canvas/sidebar2/chats" unique_id=1309781115]
+layout_mode = 2
+text = "Press space to win!"
+
+[node name="PanelContainer" type="PanelContainer" parent="Canvas" unique_id=1037985386]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 324.0
+offset_top = 534.0
+offset_right = 1152.0
+offset_bottom = 648.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.805, 0.425)
+
+[node name="prompt" type="Panel" parent="Canvas/PanelContainer" unique_id=271560997]
+layout_mode = 2

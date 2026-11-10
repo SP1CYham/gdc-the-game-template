@@ -164,7 +164,6 @@ root_node = NodePath("../UI")
 libraries/ = SubResource("AnimationLibrary_grrlh")
 
 [connection signal="local_leaderboard_updated" from="LocalDataManager" to="UI/Leaderboard" method="_build_local_entries"]
-[connection signal="global_leaderboards_updated" from="GlobalDataManager" to="UI/Leaderboard" method="_build_online_entries"]
 [connection signal="score_achieved" from="Game/Game" to="UI/ScoreCreator" method="open_creator"]
 [connection signal="request_local_leaderboards" from="UI/Leaderboard" to="LocalDataManager" method="emit_scores"]
 [connection signal="request_online_leaderboards" from="UI/Leaderboard" to="GlobalDataManager" method="get_scores"]

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d2m56koxwdypo"]
+
+[ext_resource type="Script" uid="uid://dd6giypjm6mqh" path="res://micro_games/F26/claude_encouragement/claude_encourage.gd" id="1_yvom0"]
+[ext_resource type="Texture2D" uid="uid://dfb31vmpabfm1" path="res://icon.svg" id="2_5k1io"]
+
+[node name="claude_encourage" type="Node2D" unique_id=1018004362]
+script = ExtResource("1_yvom0")
+default_game_duration = 4.0
+post_game_time = 1.4
+lose_on_timeout = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=390164000]
+position = Vector2(577, 328)
+texture = ExtResource("2_5k1io")
+
+[node name="Label" type="Label" parent="." unique_id=1981055016]
+offset_left = 508.0
+offset_top = 227.0
+offset_right = 655.0
+offset_bottom = 250.0
+text = "Press space to win!"
+
+[node name="Control" type="Control" parent="." unique_id=1945944651]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://dxex1oxsqaqxw"]
+
+[ext_resource type="Texture2D" uid="uid://clcww0bgpbitl" path="res://micro_games/F26/claude_encouragement/sprites/whip.png" id="1_p065e"]
+
+[resource]
+atlas = ExtResource("1_p065e")
+region = Rect2(0, 0, 50, 48)

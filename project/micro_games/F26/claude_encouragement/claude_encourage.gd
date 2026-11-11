@@ -7,6 +7,8 @@ var gamelost: bool = false
 var gamewon: bool = false
 @export var claude_sprite: Sprite2D
 var claude_init_pos: Vector2
+@export var claude_anim: AnimationPlayer
+@export var whip_part: CPUParticles2D
 
 @export var whip_sprite: Sprite2D
 @export var whip_sprite_rest: Texture2D
@@ -32,6 +34,8 @@ func _ready():
 	#get_tree().create_timer(timeout).timeout.connect(func(): done.emit(true))
 	claude_init_pos = claude_sprite.transform.get_origin()
 	
+	claude_anim.play("claude0")
+	
 	for arr in game_array:
 		whips_required += arr.whips_needed
 
@@ -53,42 +57,53 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		_whip()
+		if event.pressed:
+			_whip()
+		else: _whip_end()
+			
+		
+		
 
 func _on_claude_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	pass
 
 func on_win():
 	gamewon = true
+	claude_anim.clear_queue()
+	claude_anim.play("claudeDead")
 
 func on_lose():
 	gamelost = true
+	
 	#audio_service.paused = true
 
 func _whip():
 	#print("whip called")
 	
 	whip_sprite.texture = whip_sprite_clicked
+	whip_part.emitting = true
 	
 	if on_claude:
 		whip_count += 1
 		print("whip count: ", whip_count)
 		
 		if whip_count >= whips_required:
-			trigger_game_won()
+			if !gamewon: trigger_game_won()
 			return
 		
 		extra_shake = 1
 		
 		var whip_sum: int = 0
+		var indx: int = -1
 		for arr in game_array:
+			indx += 1
 			whip_sum += arr.whips_needed
-			if whip_count <= whip_sum:
+			if whip_count > whip_sum:
 				#the phase that the whips are in
-				claude_sprite.texture = arr.sprite
-	
-	await get_tree().create_timer(whip_sprite_time_appeared).timeout
-	_whip_end()
+				claude_anim.clear_queue()
+				claude_anim.speed_scale = arr.anim_speed
+				claude_anim.play("claudeHurt")
+				claude_anim.queue("claude" + str(indx))
 
 func _whip_end():
 	whip_sprite.texture = whip_sprite_rest

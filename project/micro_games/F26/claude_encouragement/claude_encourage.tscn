@@ -1,43 +1,268 @@
 [gd_scene format=3 uid="uid://d2m56koxwdypo"]
 
 [ext_resource type="Script" uid="uid://dd6giypjm6mqh" path="res://micro_games/F26/claude_encouragement/claude_encourage.gd" id="1_yvom0"]
-[ext_resource type="Texture2D" uid="uid://dfb31vmpabfm1" path="res://icon.svg" id="2_5k1io"]
 [ext_resource type="Script" uid="uid://cqbictdtq62vd" path="res://micro_games/F26/claude_encouragement/claude_progression.gd" id="2_dnfcr"]
 [ext_resource type="Texture2D" uid="uid://cfhi45lgwyujv" path="res://micro_games/F26/claude_encouragement/sprites/whipTexture2.tres" id="3_3g0jw"]
 [ext_resource type="Texture2D" uid="uid://dxex1oxsqaqxw" path="res://micro_games/F26/claude_encouragement/sprites/whipTexture1.tres" id="3_dnfcr"]
+[ext_resource type="Texture2D" uid="uid://byp30b440xgiv" path="res://micro_games/F26/claude_encouragement/sprites/claudeCli.png" id="6_f3nks"]
 [ext_resource type="FontFile" uid="uid://k63t7wblivm1" path="res://shared/fonts/BoldsPixels.ttf" id="6_qbykh"]
+[ext_resource type="Texture2D" uid="uid://bbsm6uc00mp7x" path="res://micro_games/F26/claude_encouragement/sprites/claudeDead.png" id="7_4neoo"]
+[ext_resource type="Texture2D" uid="uid://bwff3leyjlrcu" path="res://micro_games/F26/claude_encouragement/sprites/shadow.png" id="7_s55i7"]
 [ext_resource type="Texture2D" uid="uid://byjredcsgcfy3" path="res://micro_games/F26/claude_encouragement/sprites/claudeLogo.png" id="7_xt5o0"]
+[ext_resource type="Script" uid="uid://n174f7wc64us" path="res://micro_games/F26/claude_encouragement/claude_prev_chats.gd" id="10_4neoo"]
 
 [sub_resource type="Resource" id="Resource_3g0jw"]
 script = ExtResource("2_dnfcr")
-whips_needed = 5
-sprite = ExtResource("2_5k1io")
 metadata/_custom_type_script = "uid://cqbictdtq62vd"
 
 [sub_resource type="Resource" id="Resource_4xxrk"]
 script = ExtResource("2_dnfcr")
-whips_needed = 6
-sprite = ExtResource("2_5k1io")
+anim_speed = 1.2
 metadata/_custom_type_script = "uid://cqbictdtq62vd"
 
 [sub_resource type="Resource" id="Resource_qbykh"]
 script = ExtResource("2_dnfcr")
-whips_needed = 7
-sprite = ExtResource("2_5k1io")
+whips_needed = 2
+anim_speed = 1.5
 metadata/_custom_type_script = "uid://cqbictdtq62vd"
 
 [sub_resource type="Resource" id="Resource_xt5o0"]
 script = ExtResource("2_dnfcr")
-whips_needed = 7
-sprite = ExtResource("2_5k1io")
+whips_needed = 3
+anim_speed = 1.7
+metadata/_custom_type_script = "uid://cqbictdtq62vd"
+
+[sub_resource type="Resource" id="Resource_f3nks"]
+script = ExtResource("2_dnfcr")
+whips_needed = 4
+anim_speed = 1.8
+metadata/_custom_type_script = "uid://cqbictdtq62vd"
+
+[sub_resource type="Resource" id="Resource_s55i7"]
+script = ExtResource("2_dnfcr")
+whips_needed = 5
+anim_speed = 2.0
+metadata/_custom_type_script = "uid://cqbictdtq62vd"
+
+[sub_resource type="Resource" id="Resource_4neoo"]
+script = ExtResource("2_dnfcr")
+whips_needed = 10
+anim_speed = 2.5
 metadata/_custom_type_script = "uid://cqbictdtq62vd"
 
 [sub_resource type="Curve" id="Curve_dnfcr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_s55i7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_f3nks")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_4neoo"]
+resource_name = "claude0"
+length = 0.40002000596076254
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ehydw"]
+resource_name = "claude1"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_qyrot"]
+resource_name = "claude2"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_n2pvu"]
+resource_name = "claude3"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_owge0"]
+resource_name = "claude4"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_yulu3"]
+resource_name = "claude5"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_guksq"]
+resource_name = "claudeDead"
+length = 1.0001
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_4neoo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7gi4x"]
+resource_name = "claudeHurt"
+length = 0.083333336
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehydw"]
+_data = {
+&"RESET": SubResource("Animation_s55i7"),
+&"claude0": SubResource("Animation_4neoo"),
+&"claude1": SubResource("Animation_ehydw"),
+&"claude2": SubResource("Animation_qyrot"),
+&"claude3": SubResource("Animation_n2pvu"),
+&"claude4": SubResource("Animation_owge0"),
+&"claude5": SubResource("Animation_yulu3"),
+&"claudeDead": SubResource("Animation_guksq"),
+&"claudeHurt": SubResource("Animation_7gi4x")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(179.5, 182.5)
+size = Vector2(301, 223)
 
 [sub_resource type="LabelSettings" id="LabelSettings_57qmd"]
 resource_local_to_scene = true
@@ -61,17 +286,26 @@ font_color = Color(0.19215687, 0.18039216, 0.2, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 resource_local_to_scene = true
 font = ExtResource("6_qbykh")
-font_size = 25
+font_size = 46
 font_color = Color(0.19215687, 0.18039216, 0.2, 1)
 
-[node name="claude_encourage" type="Node2D" unique_id=1018004362 node_paths=PackedStringArray("claude_sprite", "whip_sprite")]
+[sub_resource type="Curve" id="Curve_57qmd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.6250001, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_d0u6y"]
+colors = PackedColorArray(0.97, 0.97, 0.97, 1, 1, 0.97833335, 0.74, 0)
+
+[node name="claude_encourage" type="Node2D" unique_id=1018004362 node_paths=PackedStringArray("claude_sprite", "claude_anim", "whip_part", "whip_sprite")]
 script = ExtResource("1_yvom0")
-claude_sprite = NodePath("Claude/Sprite2D")
+claude_sprite = NodePath("Claude/sprite")
+claude_anim = NodePath("Claude/sprite/AnimationPlayer")
+whip_part = NodePath("Cursor/CPUParticles2D")
 whip_sprite = NodePath("Cursor")
 whip_sprite_rest = ExtResource("3_dnfcr")
 whip_sprite_clicked = ExtResource("3_3g0jw")
 whip_sprite_time_appeared = 0.1
-game_array = Array[ExtResource("2_dnfcr")]([SubResource("Resource_3g0jw"), SubResource("Resource_4xxrk"), SubResource("Resource_qbykh"), SubResource("Resource_xt5o0")])
+game_array = Array[ExtResource("2_dnfcr")]([SubResource("Resource_3g0jw"), SubResource("Resource_4xxrk"), SubResource("Resource_qbykh"), SubResource("Resource_xt5o0"), SubResource("Resource_f3nks"), SubResource("Resource_s55i7"), SubResource("Resource_4neoo")])
 shake_curve = SubResource("Curve_dnfcr")
 shake_intensity = 20.0
 default_game_duration = 4.0
@@ -80,13 +314,25 @@ lose_on_timeout = true
 
 [node name="Claude" type="Area2D" parent="." unique_id=752724551]
 z_index = 10
-position = Vector2(489, 465)
+position = Vector2(480.61, 465)
 
-[node name="Sprite2D" type="Sprite2D" parent="Claude" unique_id=390164000]
-texture = ExtResource("2_5k1io")
+[node name="sprite" type="Sprite2D" parent="Claude" unique_id=390164000]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("6_f3nks")
+hframes = 13
+
+[node name="shadow" type="Sprite2D" parent="Claude/sprite" unique_id=453268612]
+self_modulate = Color(0, 0, 0, 0.24313726)
+z_index = -1
+position = Vector2(0, -0.635)
+texture = ExtResource("7_s55i7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Claude/sprite" unique_id=1008960180]
+libraries/ = SubResource("AnimationLibrary_ehydw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Claude" unique_id=1083933534]
-position = Vector2(-25.25, -24.75)
+position = Vector2(16.890015, 21.5)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Canvas" type="Control" parent="." unique_id=1945944651]
@@ -124,6 +370,7 @@ offset_bottom = 648.0
 
 [node name="logo" type="TextureRect" parent="Canvas/sidebar2" unique_id=1455816521]
 self_modulate = Color(0.19215687, 0.18039216, 0.2, 1)
+texture_filter = 1
 layout_mode = 0
 offset_left = 20.0
 offset_top = 30.0
@@ -181,12 +428,14 @@ ewf
 wefwef
 wefwefwef"
 label_settings = SubResource("LabelSettings_yf5fn")
+script = ExtResource("10_4neoo")
+all_chats = Array[String](["how to get a girlfriend", "can claude be a girlfriend", "how do i make money", "am i gay", "can you write my essay", "whats 1 + 1", "how do i code in racket", "how to drop math 145", "how to stop crying", "is a 32% midterm good", "do nfts still make money", "whats meaning of life", "should i join uwgc", "startup ideas", "write my linkedin post", "hackathon ideas", "ideas for previous chats", "is unity better than godot", "your first chat with claude", "is daily ramen healthy", "whats a tuple", "how open milk carton", "is waterloo water safe", "do grades really matter", "open google coops", "flights to SF", "how do laundry", "how to fry eggs", "how cure back pain", "carpal tunnel fixes", "how to not stink", "is deodorant good", "make productivity app", "how do i install git", "how to install league", "how to drop cs 145", "how drop math 147", "epsilon delta proofs", "good food places uw", "how to overthrow uwgc", "is MC really that ugly", "when is M4 done", "when is drop deadline", "how to marry claude", "how to find friends", "how to talk to women", "what is a binary tree", "whats a lamdba", "how to code bubble sort", "leetcode easy solution", "how to cook rice", "how to use dishwasher", "afraid of showers", "how to touch grass", "what if i dont pay tax"])
 
 [node name="prompt area" type="ColorRect" parent="Canvas" unique_id=232862366]
 z_index = 1
 layout_mode = 0
 offset_left = 324.0
-offset_top = 560.0
+offset_top = 501.0
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
@@ -198,23 +447,48 @@ layout_mode = 0
 offset_left = 42.0
 offset_top = 13.0
 offset_right = 782.0
-offset_bottom = 64.0
+offset_bottom = 108.0
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Canvas/prompt area/prompt" unique_id=1463835328]
 layout_mode = 0
 offset_left = 15.0
-offset_top = 13.0
-offset_right = 620.0
-offset_bottom = 40.0
-text = "+     Describe a task or ask a question"
+offset_top = 17.0
+offset_right = 722.0
+offset_bottom = 79.0
+text = "+  Describe a task or ask a question"
 label_settings = SubResource("LabelSettings_g4v7s")
 vertical_alignment = 1
 
 [node name="Cursor" type="Sprite2D" parent="." unique_id=1669308976]
 z_index = 100
+texture_filter = 1
 position = Vector2(614, 336)
 scale = Vector2(3, 3)
 texture = ExtResource("3_dnfcr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Cursor" unique_id=859720823]
+position = Vector2(-8, -16)
+emitting = false
+amount = 10
+texture = ExtResource("7_xt5o0")
+lifetime = 0.09999999999999999
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.82
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 425.47
+initial_velocity_max = 425.47
+angular_velocity_min = 35.77
+angular_velocity_max = 76.02
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_57qmd")
+color_ramp = SubResource("Gradient_d0u6y")
 
 [connection signal="input_event" from="Claude" to="." method="_on_claude_input_event"]
 [connection signal="mouse_entered" from="Claude" to="." method="_on_claude_mouse_entered"]

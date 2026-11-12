@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dqm3qhygku3lo" path="res://micro_games/F26/claude_encouragement/sprites/claudeUi.png" id="8_ehydw"]
 [ext_resource type="Script" uid="uid://n174f7wc64us" path="res://micro_games/F26/claude_encouragement/scripts/claude_prev_chats.gd" id="10_4neoo"]
 [ext_resource type="AudioStream" uid="uid://c4wt0c1atiuq1" path="res://micro_games/F26/claude_encouragement/sounds/claudeWhip.mp3" id="13_owge0"]
+[ext_resource type="Texture2D" uid="uid://b5evckb4xktta" path="res://micro_games/F26/claude_encouragement/sprites/claudeTopRight.png" id="13_yulu3"]
 [ext_resource type="AudioStream" uid="uid://b51inyyfxd7ip" path="res://micro_games/F26/claude_encouragement/sounds/claudeHit.mp3" id="14_yulu3"]
 [ext_resource type="AudioStream" uid="uid://tjk76undaspr" path="res://micro_games/F26/claude_encouragement/sounds/claudeDie.mp3" id="15_guksq"]
 
@@ -367,7 +368,7 @@ offset_bottom = 2235.0
 offset_transform_position = Vector2(0, -11.29)
 mouse_filter = 2
 script = ExtResource("8_7gi4x")
-y_array = Array[float]([-207.0, -312.0, -513.0, -632.0, -865.0, -1002.0, -1078.0, -1205.0, -1335.0, -1590.0])
+y_array = Array[float]([-221.2, -312.0, -513.0, -632.0, -865.0, -1002.0, -1078.0, -1205.0, -1335.0, -1612.895])
 claude_script = NodePath("../..")
 move_speed = 5.0
 
@@ -635,7 +636,7 @@ vertical_alignment = 1
 [node name="8" type="PanelContainer" parent="Canvas/chat" unique_id=771921584]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 267.0
+offset_left = 356.0
 offset_top = 1589.0
 offset_right = 783.0
 offset_bottom = 1697.0
@@ -659,7 +660,8 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(15.02, 0)
 mouse_filter = 2
 bbcode_enabled = true
-text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=44][shake rate=20.0 level=30][color=#ff5555]SO FOR THE FINAL, TURING-FREAKING TIME,"
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=44][shake rate=20.0 level=30][color=#ff5555]SO FOR THE FINAL, 
+ALAN-TURING TIME,"
 vertical_alignment = 1
 
 [node name="9" type="PanelContainer" parent="Canvas/chat" unique_id=2048652492]
@@ -702,7 +704,7 @@ offset_bottom = 1974.0
 mouse_filter = 2
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/10" unique_id=1829807980]
-self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+self_modulate = Color(0.12398646, 0.12992337, 0.1885232, 1)
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("8_ehydw")
@@ -719,7 +721,7 @@ offset_transform_enabled = true
 offset_transform_position = Vector2(15.02, 0)
 mouse_filter = 2
 bbcode_enabled = true
-text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24][shake]*sniff* the.. startup is... finished.. 
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24][shake][color=light-blue]*sniff* the.. startup is... finished.. 
 i hope you're... *sniff* happy with it..."
 vertical_alignment = 1
 
@@ -831,6 +833,16 @@ offset_bottom = 79.0
 text = "+  Describe a task or ask a question"
 label_settings = SubResource("LabelSettings_g4v7s")
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Canvas" unique_id=1967284852]
+self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 1034.0
+offset_top = 7.0
+offset_right = 1142.0
+offset_bottom = 39.0
+texture = ExtResource("13_yulu3")
 
 [node name="Cursor" type="Sprite2D" parent="." unique_id=1669308976]
 z_index = 100

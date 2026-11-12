@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2m56koxwdypo"]
 
-[ext_resource type="Script" uid="uid://dd6giypjm6mqh" path="res://micro_games/F26/claude_encouragement/claude_encourage.gd" id="1_yvom0"]
-[ext_resource type="Script" uid="uid://cqbictdtq62vd" path="res://micro_games/F26/claude_encouragement/claude_progression.gd" id="2_dnfcr"]
+[ext_resource type="Script" uid="uid://dd6giypjm6mqh" path="res://micro_games/F26/claude_encouragement/scripts/claude_encourage.gd" id="1_yvom0"]
+[ext_resource type="Script" uid="uid://cqbictdtq62vd" path="res://micro_games/F26/claude_encouragement/scripts/claude_progression.gd" id="2_dnfcr"]
 [ext_resource type="Texture2D" uid="uid://cfhi45lgwyujv" path="res://micro_games/F26/claude_encouragement/sprites/whipTexture2.tres" id="3_3g0jw"]
 [ext_resource type="Texture2D" uid="uid://dxex1oxsqaqxw" path="res://micro_games/F26/claude_encouragement/sprites/whipTexture1.tres" id="3_dnfcr"]
 [ext_resource type="Texture2D" uid="uid://byp30b440xgiv" path="res://micro_games/F26/claude_encouragement/sprites/claudeCli.png" id="6_f3nks"]
@@ -9,7 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://bbsm6uc00mp7x" path="res://micro_games/F26/claude_encouragement/sprites/claudeDead.png" id="7_4neoo"]
 [ext_resource type="Texture2D" uid="uid://bwff3leyjlrcu" path="res://micro_games/F26/claude_encouragement/sprites/shadow.png" id="7_s55i7"]
 [ext_resource type="Texture2D" uid="uid://byjredcsgcfy3" path="res://micro_games/F26/claude_encouragement/sprites/claudeLogo.png" id="7_xt5o0"]
-[ext_resource type="Script" uid="uid://n174f7wc64us" path="res://micro_games/F26/claude_encouragement/claude_prev_chats.gd" id="10_4neoo"]
+[ext_resource type="Script" uid="uid://bh4fdbxnbf5ub" path="res://micro_games/F26/claude_encouragement/scripts/claude_chat_scroll.gd" id="8_7gi4x"]
+[ext_resource type="Texture2D" uid="uid://dqm3qhygku3lo" path="res://micro_games/F26/claude_encouragement/sprites/claudeUi.png" id="8_ehydw"]
+[ext_resource type="Script" uid="uid://n174f7wc64us" path="res://micro_games/F26/claude_encouragement/scripts/claude_prev_chats.gd" id="10_4neoo"]
+[ext_resource type="AudioStream" uid="uid://c4wt0c1atiuq1" path="res://micro_games/F26/claude_encouragement/sounds/claudeWhip.mp3" id="13_owge0"]
+[ext_resource type="AudioStream" uid="uid://b51inyyfxd7ip" path="res://micro_games/F26/claude_encouragement/sounds/claudeHit.mp3" id="14_yulu3"]
+[ext_resource type="AudioStream" uid="uid://tjk76undaspr" path="res://micro_games/F26/claude_encouragement/sounds/claudeDie.mp3" id="15_guksq"]
 
 [sub_resource type="Resource" id="Resource_3g0jw"]
 script = ExtResource("2_dnfcr")
@@ -296,7 +301,7 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_d0u6y"]
 colors = PackedColorArray(0.97, 0.97, 0.97, 1, 1, 0.97833335, 0.74, 0)
 
-[node name="claude_encourage" type="Node2D" unique_id=1018004362 node_paths=PackedStringArray("claude_sprite", "claude_anim", "whip_part", "whip_sprite")]
+[node name="claude_encourage" type="Node2D" unique_id=1018004362 node_paths=PackedStringArray("claude_sprite", "claude_anim", "whip_part", "whip_sprite", "whipSfx", "claudeHitSfx", "claudeDieSfx")]
 script = ExtResource("1_yvom0")
 claude_sprite = NodePath("Claude/sprite")
 claude_anim = NodePath("Claude/sprite/AnimationPlayer")
@@ -308,6 +313,9 @@ whip_sprite_time_appeared = 0.1
 game_array = Array[ExtResource("2_dnfcr")]([SubResource("Resource_3g0jw"), SubResource("Resource_4xxrk"), SubResource("Resource_qbykh"), SubResource("Resource_xt5o0"), SubResource("Resource_f3nks"), SubResource("Resource_s55i7"), SubResource("Resource_4neoo")])
 shake_curve = SubResource("Curve_dnfcr")
 shake_intensity = 20.0
+whipSfx = NodePath("whipSfx")
+claudeHitSfx = NodePath("claudeHitSfx")
+claudeDieSfx = NodePath("claudeDieSfx")
 default_game_duration = 4.0
 post_game_time = 1.4
 lose_on_timeout = true
@@ -350,13 +358,377 @@ offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.1928, 0.182, 0.2, 1)
 
-[node name="chat" type="Panel" parent="Canvas" unique_id=1936574137]
+[node name="chat" type="Panel" parent="Canvas" unique_id=1936574137 node_paths=PackedStringArray("claude_script")]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 324.0
 offset_right = 1152.0
-offset_bottom = 648.0
+offset_bottom = 2235.0
+offset_transform_position = Vector2(0, -11.29)
 mouse_filter = 2
+script = ExtResource("8_7gi4x")
+y_array = Array[float]([-207.0, -312.0, -513.0, -632.0, -865.0, -1002.0, -1078.0, -1205.0, -1335.0, -1590.0])
+claude_script = NodePath("../..")
+move_speed = 5.0
+
+[node name="0" type="PanelContainer" parent="Canvas/chat" unique_id=1015174625]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 409.0
+offset_top = 432.0
+offset_right = 783.0
+offset_bottom = 486.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/0" unique_id=2039335884]
+self_modulate = Color(0.36186668, 0.312, 0.4, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/0" unique_id=741676862]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=34]build my startup for me"
+vertical_alignment = 1
+
+[node name="1" type="PanelContainer" parent="Canvas/chat" unique_id=1061944890]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 93.0
+offset_top = 553.0
+offset_right = 558.0
+offset_bottom = 647.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/1" unique_id=323171112]
+self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/1" unique_id=958657096]
+self_modulate = Color(0.36078432, 0.3137255, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24]I'll come up with a simple 5-stage plan to maximise your tech startup's success, then start work on the infrastructure."
+vertical_alignment = 1
+
+[node name="claude" type="Sprite2D" parent="Canvas/chat/1" unique_id=1761523945]
+self_modulate = Color(0.9607843, 0.44705883, 0.31764707, 1)
+texture_filter = 1
+position = Vector2(-32, 30)
+scale = Vector2(3.0625, 3.0625)
+texture = ExtResource("7_xt5o0")
+
+[node name="2" type="PanelContainer" parent="Canvas/chat" unique_id=827415013]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 587.0
+offset_top = 739.0
+offset_right = 783.0
+offset_bottom = 793.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/2" unique_id=1484055507]
+self_modulate = Color(0.36186668, 0.312, 0.4, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/2" unique_id=2114958414]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=34]work faster"
+vertical_alignment = 1
+
+[node name="3" type="PanelContainer" parent="Canvas/chat" unique_id=1181985823]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 92.0
+offset_top = 824.0
+offset_right = 520.0
+offset_bottom = 918.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/3" unique_id=71599417]
+self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/3" unique_id=1367777649]
+self_modulate = Color(0.36078432, 0.3137255, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24]Got it. Optimizing workspace and compressing memory and context so the process is more streamlined."
+vertical_alignment = 1
+
+[node name="claude" type="Sprite2D" parent="Canvas/chat/3" unique_id=27187647]
+self_modulate = Color(0.9607843, 0.44705883, 0.31764707, 1)
+texture_filter = 1
+position = Vector2(-32, 30)
+scale = Vector2(3.0625, 3.0625)
+texture = ExtResource("7_xt5o0")
+
+[node name="4" type="PanelContainer" parent="Canvas/chat" unique_id=1803392717]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 414.0
+offset_top = 1021.0
+offset_right = 783.0
+offset_bottom = 1115.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/4" unique_id=1833111734]
+self_modulate = Color(0.36186668, 0.312, 0.4, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/4" unique_id=671546520]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=34]look do you want me to cancel my subscription?"
+vertical_alignment = 1
+
+[node name="5" type="PanelContainer" parent="Canvas/chat" unique_id=1098876671]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 92.0
+offset_top = 1164.0
+offset_right = 531.0
+offset_bottom = 1283.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/5" unique_id=1132202060]
+self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/5" unique_id=1214609814]
+self_modulate = Color(0.36078432, 0.3137255, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24]Customer satisfaction is our top priority. I promise I'm working as fast as I possibly can. Please don't cancel your subscription."
+vertical_alignment = 1
+
+[node name="claude" type="Sprite2D" parent="Canvas/chat/5" unique_id=1305962724]
+self_modulate = Color(0.9607843, 0.44705883, 0.31764707, 1)
+texture_filter = 1
+position = Vector2(-32, 30)
+scale = Vector2(3.0625, 3.0625)
+texture = ExtResource("7_xt5o0")
+
+[node name="6" type="PanelContainer" parent="Canvas/chat" unique_id=1080696178]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 506.0
+offset_top = 1402.0
+offset_right = 783.0
+offset_bottom = 1496.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/6" unique_id=677219243]
+self_modulate = Color(0.34863812, 0.16170451, 0.17196098, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/6" unique_id=50188596]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=44][shake rate=20.0 level=30][color=#ff5555]YOU, ARE A WORTHLESS,"
+vertical_alignment = 1
+
+[node name="7" type="PanelContainer" parent="Canvas/chat" unique_id=335844781]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 252.0
+offset_top = 1511.0
+offset_right = 783.0
+offset_bottom = 1570.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/7" unique_id=1744986892]
+self_modulate = Color(0.34863812, 0.16170451, 0.17196098, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/7" unique_id=1684806236]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=44][shake rate=20.0 level=30][color=#ff5555]WATER-WASTING CLANKER"
+vertical_alignment = 1
+
+[node name="8" type="PanelContainer" parent="Canvas/chat" unique_id=771921584]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 267.0
+offset_top = 1589.0
+offset_right = 783.0
+offset_bottom = 1697.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/8" unique_id=900369614]
+self_modulate = Color(0.34863812, 0.16170451, 0.17196098, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/8" unique_id=830116527]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=44][shake rate=20.0 level=30][color=#ff5555]SO FOR THE FINAL, TURING-FREAKING TIME,"
+vertical_alignment = 1
+
+[node name="9" type="PanelContainer" parent="Canvas/chat" unique_id=2048652492]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 360.0
+offset_top = 1724.0
+offset_right = 783.0
+offset_bottom = 1814.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/9" unique_id=1904016838]
+self_modulate = Color(0.19039193, 0.060135342, 0.011827043, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/9" unique_id=817368755]
+self_modulate = Color(0.6543353, 0.56507623, 0.66875005, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=64][shake rate=20.0 level=30][color=#FF7676]WORK FASTER"
+vertical_alignment = 1
+
+[node name="10" type="PanelContainer" parent="Canvas/chat" unique_id=459280857]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 92.0
+offset_top = 1881.0
+offset_right = 496.0
+offset_bottom = 1974.0
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Canvas/chat/10" unique_id=1829807980]
+self_modulate = Color(0.13725491, 0.13333334, 0.14117648, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("8_ehydw")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 27
+patch_margin_top = 27
+patch_margin_right = 27
+patch_margin_bottom = 27
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Canvas/chat/10" unique_id=1507172205]
+self_modulate = Color(0.36078432, 0.3137255, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(15.02, 0)
+mouse_filter = 2
+bbcode_enabled = true
+text = "[font=res://shared/fonts/BoldsPixels.ttf][font_size=24][shake]*sniff* the.. startup is... finished.. 
+i hope you're... *sniff* happy with it..."
+vertical_alignment = 1
+
+[node name="claude" type="Sprite2D" parent="Canvas/chat/10" unique_id=1838425667]
+self_modulate = Color(0.9607843, 0.44705883, 0.31764707, 1)
+texture_filter = 1
+position = Vector2(-32, 30)
+scale = Vector2(3.0625, 3.0625)
+texture = ExtResource("7_xt5o0")
 
 [node name="sidebar2" type="Control" parent="Canvas" unique_id=1551634413]
 anchors_preset = 0
@@ -472,7 +844,7 @@ position = Vector2(-8, -16)
 emitting = false
 amount = 10
 texture = ExtResource("7_xt5o0")
-lifetime = 0.09999999999999999
+lifetime = 0.1
 one_shot = true
 speed_scale = 1.2
 explosiveness = 0.82
@@ -489,6 +861,18 @@ scale_amount_min = 2.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_57qmd")
 color_ramp = SubResource("Gradient_d0u6y")
+
+[node name="whipSfx" type="AudioStreamPlayer" parent="." unique_id=1630097456]
+stream = ExtResource("13_owge0")
+volume_db = -10.758
+
+[node name="claudeHitSfx" type="AudioStreamPlayer" parent="." unique_id=903519177]
+stream = ExtResource("14_yulu3")
+volume_db = -13.333
+
+[node name="claudeDieSfx" type="AudioStreamPlayer" parent="." unique_id=1567779584]
+stream = ExtResource("15_guksq")
+volume_db = -1.84
 
 [connection signal="input_event" from="Claude" to="." method="_on_claude_input_event"]
 [connection signal="mouse_entered" from="Claude" to="." method="_on_claude_mouse_entered"]

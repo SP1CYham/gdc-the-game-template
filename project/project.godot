@@ -30,6 +30,10 @@ Talo="*uid://bpmdn8oc34pg7"
 
 window/stretch/mode="viewport"
 
+[editor]
+
+movie_writer/fps=30
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/talo/plugin.cfg")

@@ -7,8 +7,8 @@
 script = ExtResource("2_fw3js")
 title = "Claude Encouragement"
 authors = "SpicySoup"
-description = "uhhhhh this is ethical"
-instruction = "Whip!"
+description = "Help your little llm helper work faster by encouraging it with a little... physical shock."
+instruction = "*Encourage!"
 game_scene = ExtResource("1_165qh")
 control_format = 0
 start_with_mouse_hidden = true

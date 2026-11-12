@@ -1,3 +1,4 @@
+class_name ClaudeEncourageScript
 extends MicroGame
 
 var timeout : float
@@ -26,6 +27,11 @@ var whip_timer: Timer
 var extra_shake: float = 0
 
 var on_claude: bool
+
+#sounds
+@export var whipSfx: AudioStreamPlayer
+@export var claudeHitSfx: AudioStreamPlayer
+@export var claudeDieSfx: AudioStreamPlayer
 
 
 
@@ -71,6 +77,8 @@ func on_win():
 	gamewon = true
 	claude_anim.clear_queue()
 	claude_anim.play("claudeDead")
+	
+	claudeDieSfx.play()
 
 func on_lose():
 	gamelost = true
@@ -83,6 +91,9 @@ func _whip():
 	whip_sprite.texture = whip_sprite_clicked
 	whip_part.emitting = true
 	
+	whipSfx.pitch_scale = randf_range(0.9, 1.1)
+	whipSfx.play()
+	
 	if on_claude:
 		whip_count += 1
 		print("whip count: ", whip_count)
@@ -92,6 +103,9 @@ func _whip():
 			return
 		
 		extra_shake = 1
+		
+		claudeHitSfx.pitch_scale = randf_range(1.3, 1.4)
+		claudeHitSfx.play()
 		
 		var whip_sum: int = 0
 		var indx: int = -1
